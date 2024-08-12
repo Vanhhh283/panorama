@@ -198,6 +198,27 @@ def calculate_similarity_percentage_akaze(img1, img2):
     similarity_percentage = (2 * num_matches / total_keypoints) * 100
     return similarity_percentage
 
+def calculate_similarity_percentage_sift(img1, img2):
+    sift = cv2.SIFT_create()
+    kp1, des1 = sift.detectAndCompute(img1, None)
+    kp2, des2 = sift.detectAndCompute(img2, None)
+
+    bf = cv2.BFMatcher(cv2.NORM_L2, crossCheck=False)
+
+    rawMatches = bf.knnMatch(des1, des2,2)
+    matches = []
+
+    for m, n in rawMatches:
+        if m.distance < n.distance * 0.75:
+            matches.append(m)
+
+    total_keypoints = len(kp1) + len(kp2)
+    num_matches = len(matches)
+    if total_keypoints == 0:
+        return 0.0  
+    similarity_percentage = (2 * num_matches / total_keypoints) * 100
+    return similarity_percentage
+
 def draw_outer_bounding_box(image, color=(0, 255, 0), thickness=10):
     image_copy = copy.deepcopy(image)
     height, width = image_copy.shape[:2]
