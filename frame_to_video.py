@@ -1,4 +1,4 @@
-from ultis import *
+from utils import *
 
 folder_path = 'D:/Xu ly anh/thucnghiem/v46_compare'  
 output_path = 'D:/Xu ly anh/thucnghiem/compare_video46_orb.mp4' 
