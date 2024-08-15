@@ -4,7 +4,7 @@ import os
 import numpy as np
 import copy
 
-def extract_frames(video_path, frame_distance, output_folder):
+def extract_frames(video_path, frame_distance, output_folder, resize):
     if not os.path.exists(output_folder):
         os.makedirs(output_folder)
     
@@ -23,7 +23,7 @@ def extract_frames(video_path, frame_distance, output_folder):
         if not ret:
             break
         
-        frame = cv2.resize(frame, None, fx=0.5, fy=0.5, interpolation=cv2.INTER_LINEAR) #resize
+        frame = cv2.resize(frame, None, fx=resize, fy=resize, interpolation=cv2.INTER_LINEAR) #resize
         
         frame_path = os.path.join(output_folder, f"frame_{count:04d}.jpg")
         cv2.imwrite(frame_path, frame)
