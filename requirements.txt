@@ -5,3 +5,4 @@ opencv-python==4.10.0.84
 torch==2.4.0+cu118
 torchaudio==2.4.0+cu118
 torchvision==0.19.0
+tqdm==4.66.5
